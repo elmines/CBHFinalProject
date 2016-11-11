@@ -1,6 +1,6 @@
 SUBROUTINE OPT2
   CALL SYSTEM("clear")
   PRINT *, "User selected Option 2"
-  PRINT *, "Press Enter to Continue . . ."
+  WRITE(*, "(A)", advance="no") "Press Enter to continue . . ."
   READ *
 END SUBROUTINE OPT2
