@@ -25,8 +25,12 @@ opt6.o:		opt6.f95
 opt7.o:		opt7.f95
 	f95 opt7.f95 -Wall -c
 
+dspmenu.o:	dspmenu.f95
+	f95 dspmenu.f95 -Wall -c
+
 cbhproj.o:	cbhproj.f95
 	f95 cbhproj.f95 -Wall -c
+
 
 
 

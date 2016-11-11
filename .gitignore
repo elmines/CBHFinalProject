@@ -1,2 +1,4 @@
+cbhproj
 *.out
 *.exe
+*.o
