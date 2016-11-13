@@ -6,7 +6,7 @@ PROGRAM CBHPROJ
   
   DO
     CALL DSPMENU
-    WRITE (*, "(A)", advance="no") "Type an option and press Enter: "
+    WRITE (*, "(///T20, A)", advance="no") "Select an option: "
     READ (*, "(A1)") Option
 
     SELECT CASE(Option)
@@ -27,8 +27,8 @@ PROGRAM CBHPROJ
       CASE ('Q', 'q', 'E', 'e')
         EXIT
       CASE DEFAULT
-        WRITE (*, "(A)") "Invalid option selected."
-        WRITE (*, "(A)", advance="no") "Press Enter to continue . . ."
+        WRITE (*, "(/T18, A)") "Invalid option selected."
+        WRITE (*, "(/T18, A)", advance="no") "Press Enter to continue . . ."
         READ *
     END SELECT
     CALL SYSTEM("clear")
