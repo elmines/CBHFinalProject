@@ -3,3 +3,4 @@ cbhproj
 *.exe
 *.o
 *.data
+*.db
