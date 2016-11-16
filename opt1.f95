@@ -4,6 +4,7 @@ SUBROUTINE OPT1
 
   CALL LDSTATE
   CALL LDCOUNTY
+  CALL LDVMAKE
 
   WRITE(*, "(/T15, A)", advance="no") "Press Enter to continue . . ."
   READ *
