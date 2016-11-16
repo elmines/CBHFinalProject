@@ -2,3 +2,4 @@ cbhproj
 *.out
 *.exe
 *.o
+*.data
