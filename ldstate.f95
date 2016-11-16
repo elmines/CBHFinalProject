@@ -7,7 +7,7 @@ SUBROUTINE LDSTATE
   PRINT *, "User called LDSTATE"
 
   OPEN(7, FILE = "state.data")
-  OPEN(8, FILE = "state.db", FORM = "FORMATTED" ACCESS = "DIRECT", RECL = 22)
+  OPEN(8, FILE = "state.db", FORM = "FORMATTED", ACCESS = "DIRECT", RECL = 22)
 
   Records = 0
   BadRecords = 0
