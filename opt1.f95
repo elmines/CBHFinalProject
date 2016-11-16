@@ -3,6 +3,7 @@ SUBROUTINE OPT1
   WRITE (*, "(/T15, A/)") "* * * Police Information System Option 1 * * *"
 
   CALL LDSTATE
+  CALL LDCOUNTY
 
   WRITE(*, "(/T15, A)", advance="no") "Press Enter to continue . . ."
   READ *
