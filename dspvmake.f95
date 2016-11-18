@@ -41,12 +41,12 @@ SUBROUTINE DSPVMAKE
   WRITE(*, "(/T15, A/)") "* * * Police Information System Display Makes * * *"
 
   DO I = 1, NumRows
-    WRITE (*, "(T15, A100)") Line(I)
+    WRITE (*, "(T20, A100)") Line(I)
   END DO
 
   CLOSE(7)
 
-  WRITE (*, "(/T15, A)", advance="no") "Press Enter to continue . . ."
+  WRITE (*, "(/T20, A)", advance="no") "Press Enter to continue . . ."
   READ *
 
 END SUBROUTINE DSPVMAKE
