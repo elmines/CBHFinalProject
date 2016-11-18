@@ -44,7 +44,7 @@ SUBROUTINE DSPVMAKE
     WRITE (*, "(T15, A100)") Line(I)
   END DO
 
-  CLOSE(8)
+  CLOSE(7)
 
   WRITE (*, "(/T15, A)", advance="no") "Press Enter to continue . . ."
   READ *

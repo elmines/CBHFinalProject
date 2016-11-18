@@ -43,7 +43,7 @@ SUBROUTINE DSPCOUNTY
     WRITE (*, "(T10, A100)") Line(I)
   END DO
 
-  CLOSE(8)
+  CLOSE(7)
 
   WRITE (*, "(/T10, A)", advance="no") "Press Enter to continue . . ."
   READ *

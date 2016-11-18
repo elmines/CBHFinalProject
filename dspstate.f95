@@ -44,7 +44,7 @@ SUBROUTINE DSPSTATE
     WRITE (*, "(T5, A100)") Line(I)
   END DO
 
-  CLOSE(8)
+  CLOSE(7)
 
   WRITE (*, "(/T5, A)", advance="no") "Press Enter to continue . . ."
   READ *
