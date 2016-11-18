@@ -38,15 +38,15 @@ SUBROUTINE DSPSTATE
     END IF
   END DO
 
-  WRITE(*, "(/T30, A/)") "* * * Police Information System Display States * * *"
+  WRITE(*, "(/T15, A/)") "* * * Police Information System Display States * * *"
 
   DO I = 1, NumRows
-    WRITE (*, "(T20, A100)") Line(I)
+    WRITE (*, "(T5, A100)") Line(I)
   END DO
 
   CLOSE(8)
 
-  WRITE (*, "(/T20, A)", advance="no") "Press Enter to continue . . ."
+  WRITE (*, "(/T10, A)", advance="no") "Press Enter to continue . . ."
   READ *
 
 END SUBROUTINE DSPSTATE
