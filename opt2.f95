@@ -11,20 +11,25 @@ SUBROUTINE OPT2
 
     SELECT CASE(Option)
       CASE ('1')
+        CALL SYSTEM("clear")
         CALL DSPSTATE
       CASE ('2')
+        CALL SYSTEM("clear")
         CALL DSPCOUNTY
       CASE ('3')
+        CALL SYSTEM("clear")
         CALL DSPVMAKE
       CASE ('4')
+        CALL SYSTEM("clear")
         CALL DSPVTYPE
       CASE ('5')
+        CALL SYSTEM("clear")
         CALL DSPCOLOR
       CASE ('6', 'Q', 'q', 'E', 'e')
         EXIT 
       CASE DEFAULT
-        WRITE (*, "(/T18, A)") "Invalid option selected."
-        WRITE (*, "(/T18, A)", advance="no") "Press Enter to continue . . ."
+        WRITE (*, "(/T20, A)") "Invalid option selected."
+        WRITE (*, "(/T20, A)", advance="no") "Press Enter to continue . . ."
         READ *
     END SELECT
     CALL SYSTEM("clear")
