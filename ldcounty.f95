@@ -21,7 +21,7 @@ SUBROUTINE LDCOUNTY
       CYCLE
     END IF
 
-    WRITE(8, 200, REC = code + 1) Data
+    WRITE(8, 200, REC = code + 2) Data
 200   Format(A12)
     
     Records = Records + 1
