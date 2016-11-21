@@ -3,7 +3,7 @@ CC=f95
 CFLAGS=
 OBJ=cbhproj.o dspmenu.o \
 opt1.o opt2.o dspmenu2.o opt3.o opt4.o opt5.o opt6.o opt7.o \
-ldstate.o ldcounty.o ldvmake.o ldvtype.o ldcolor.o \
+ldstate.o ldcounty.o ldvmake.o ldvtype.o ldcolor.o ldmaster.o \
 dspstate.o dspcounty.o dspvmake.o dspvtype.o dspcolor.o \
 
 cbhproj: $(OBJ)
@@ -52,6 +52,9 @@ ldvtype.o: ldvtype.f95
 
 ldcolor.o: ldcolor.f95
 	$(CC) -c ldcolor.f95
+
+ldmaster.o: ldmaster.f95
+	$(CC) -c ldmaster.f95
 
 dspstate.o: dspstate.f95
 	$(CC) -c dspstate.f95

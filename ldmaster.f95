@@ -1,7 +1,7 @@
 !
 !Writes the master.db database file from police1.data and police2.data
 !
-PROGRAM LDMASTER
+SUBROUTINE LDMASTER
 
   IMPLICIT NONE
 
@@ -24,12 +24,9 @@ PROGRAM LDMASTER
     Counter = Counter + 1
     WRITE(9, 200, REC = Counter + 1) Part1, Part2, Part3, Part4
 
-    !PRINT *, "Counter = ", Counter
-    !WRITE(*, 200) Part1, Part2, Part3, Part4
 200   FORMAT(A3, A2, A78, A23)             !Write the data extracted from the data file to the database, but without hyphens
   END DO
 
-PRINT *, "Records written after police1 loop: ", Counter
 
   !Repeat the process for police2.data
   DO 
@@ -40,13 +37,7 @@ PRINT *, "Records written after police1 loop: ", Counter
     Counter = Counter + 1
     WRITE(9, 200, REC = Counter + 1) Part1, Part2, Part3, Part4
 
-    !PRINT *, "Counter = ", Counter
-    !WRITE(*, 200) Part1, Part2, Part3, Part4
-
   END DO 
-
-
-PRINT *, "Records written after police2 loop: ", Counter
 
   WRITE(9, "(I4.4)", REC = 1) Counter
 
@@ -54,4 +45,7 @@ PRINT *, "Records written after police2 loop: ", Counter
   CLOSE(8)
   CLOSE(9)
 
-END PROGRAM LDMASTER
+!FIXME: Have the format code set to I4 rather than I4.4; need to check which is better.
+  WRITE(*, "(A, I4.4)") "Master Records Written: ", Counter
+
+END SUBROUTINE LDMASTER

@@ -8,6 +8,8 @@ SUBROUTINE OPT1
   CALL LDVTYPE
   CALL LDCOLOR
 
+  CALL LDMASTER
+
   WRITE(*, "(/T15, A)", advance="no") "Press Enter to continue . . ."
   READ *
 END SUBROUTINE OPT1
