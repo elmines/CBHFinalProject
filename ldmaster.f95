@@ -10,7 +10,8 @@ SUBROUTINE LDMASTER
 
   OPEN(7, FILE = "police1.data")
   OPEN(8, FILE = "police2.data")
-  OPEN(9, FILE = "master.db", FORM = "FORMATTED", ACCESS = "DIRECT", RECL = 106)
+  !20 is the global file handle for the master.db file
+  OPEN(20, FILE = "master.db", FORM = "FORMATTED", ACCESS = "DIRECT", RECL = 106)
 
   Counter = 0
 
@@ -22,7 +23,7 @@ SUBROUTINE LDMASTER
     IF (rc /= 0) EXIT
 
     Counter = Counter + 1
-    WRITE(9, 200, REC = Counter + 1) Part1, Part2, Part3, Part4
+    WRITE(20, 200, REC = Counter + 1) Part1, Part2, Part3, Part4
 
 200   FORMAT(A3, A2, A78, A23)             !Write the data extracted from the data file to the database, but without hyphens
   END DO
@@ -35,15 +36,18 @@ SUBROUTINE LDMASTER
     IF (rc /= 0) EXIT
 
     Counter = Counter + 1
-    WRITE(9, 200, REC = Counter + 1) Part1, Part2, Part3, Part4
+    WRITE(20, 200, REC = Counter + 1) Part1, Part2, Part3, Part4
 
   END DO 
 
-  WRITE(9, "(I4.4)", REC = 1) Counter
+  WRITE(20, "(I4.4)", REC = 1) Counter
+
+  !Sort the data
+  CALL BUBBLE
 
   CLOSE(7)
   CLOSE(8)
-  CLOSE(9)
+  CLOSE(20)
 
 !FIXME: Have the format code set to I4 rather than I4.4; need to check which is better.
   WRITE(*, "(A, I4.4)") "Master Records Written: ", Counter
