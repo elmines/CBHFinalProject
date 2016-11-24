@@ -3,11 +3,11 @@ SUBROUTINE OPT3
   IMPLICIT NONE
 
   INTERFACE
-    RECURSIVE FUNCTION BINSEARCH (SSN, Low, High) RESULT (Record)
+    RECURSIVE FUNCTION BINSEARCHREC (SSN, Low, High) RESULT (Record)
       CHARACTER :: Record*106 !Returns the record in the master.db file corresponding to SSN
       CHARACTER, INTENT(IN) :: SSN*9
       INTEGER, INTENT(IN) :: Low, High !Lower and upper bound record indices between which to search for SSN
-    END FUNCTION BINSEARCH
+    END FUNCTION BINSEARCHREC
   END INTERFACE
 
   CHARACTER :: ReadSSN*11, SSN*9
@@ -29,7 +29,7 @@ SUBROUTINE OPT3
   OPEN(20, FILE = "master.db", FORM = "FORMATTED", ACCESS = "DIRECT", RECL = 106)
 
   READ(20, "(I4)", REC = 1) NumRecords
-  Record = BINSEARCH(SSN, 2, NumRecords + 1)
+  Record = BINSEARCHREC(SSN, 2, NumRecords + 1)
 
   WRITE(*, "(/T20, A, A106)") "Record: ", Record
 
