@@ -24,32 +24,39 @@ SUBROUTINE OPT3
 
   INTEGER :: RecNumber
 
-  CALL SYSTEM("clear")
-  WRITE (*, "(/T15, A//)") "* * * Police Information Record Lookup * * *"
-
-  WRITE (*, "(T20, A)", advance = "no") "Enter a Social Security Number (with or without hyphens): "
-  READ(*, "(A11)") ReadSSN
-
-  IF (ReadSSN(4:4) == '-') THEN
-    SSN = ReadSSN(1:3)//ReadSSN(5:6)//ReadSSN(8:11)
-  ELSE
-    SSN = ReadSSN(1:9)
-  END IF
 
   OPEN(20, FILE = "master.db", FORM = "FORMATTED", ACCESS = "DIRECT", RECL = 106)
 
-  READ(20, "(I4)", REC = 1) NumRecords
-  Record = BINSEARCHREC(SSN, 2, NumRecords + 1)
+  DO 
+    CALL SYSTEM("clear")
+    WRITE (*, "(/T15, A//)") "* * * Police Information Record Lookup * * *"
 
-  WRITE(*, "(/T20, A, A106)") "Record: ", Record
+    WRITE (*, "(T20, A)", advance = "no") "Enter a Social Security Number (with or without hyphens) or ""Q"" to exit: "
+    READ(*, "(A11)") ReadSSN
 
-  !Code for debugging binsearchindex
-  RecNumber = BINSEARCHINDEX(SSN, 2, NumRecords + 1)
-  WRITE(*, "(T20, A, I4)") "DEBUG, Record Number: ", RecNumber
+    !Working exit statement
+    IF (READSSN(1:1) == 'Q') EXIT
 
+    IF (ReadSSN(4:4) == '-') THEN
+      SSN = ReadSSN(1:3)//ReadSSN(5:6)//ReadSSN(8:11)
+    ELSE
+      SSN = ReadSSN(1:9)
+    END IF
+
+
+    READ(20, "(I4)", REC = 1) NumRecords
+    Record = BINSEARCHREC(SSN, 2, NumRecords + 1)
+
+    WRITE(*, "(/T20, A, A106)") "Record: ", Record
+
+    !Code for debugging binsearchindex
+    RecNumber = BINSEARCHINDEX(SSN, 2, NumRecords + 1)
+    WRITE(*, "(T20, A, I4)") "DEBUG, Record Number: ", RecNumber
+
+    WRITE(*, "(/T15, A)", advance="no") "Press Enter to continue . . ."
+    READ *
+  END DO
 
   CLOSE(20)
 
-  WRITE(*, "(/T15, A)", advance="no") "Press Enter to continue . . ."
-  READ *
 END SUBROUTINE OPT3
