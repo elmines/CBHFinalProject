@@ -8,11 +8,21 @@ SUBROUTINE OPT3
       CHARACTER, INTENT(IN) :: SSN*9
       INTEGER, INTENT(IN) :: Low, High !Lower and upper bound record indices between which to search for SSN
     END FUNCTION BINSEARCHREC
+
+    RECURSIVE FUNCTION BINSEARCHINDEX (SSN, Low, High) RESULT (Index)
+      INTEGER :: Index !Returns the record number in the master.db file corresponding to SSN
+      CHARACTER, INTENT(IN) :: SSN*9
+      INTEGER, INTENT(IN) :: Low, High !Lower and upper bound record indices between which to search for SSN
+    END FUNCTION BINSEARCHINDEX
+
   END INTERFACE
+
 
   CHARACTER :: ReadSSN*11, SSN*9
   CHARACTER :: Record*106
   INTEGER :: NumRecords
+
+  INTEGER :: RecNumber
 
   CALL SYSTEM("clear")
   WRITE (*, "(/T15, A//)") "* * * Police Information Record Lookup * * *"
@@ -32,6 +42,11 @@ SUBROUTINE OPT3
   Record = BINSEARCHREC(SSN, 2, NumRecords + 1)
 
   WRITE(*, "(/T20, A, A106)") "Record: ", Record
+
+  !Code for debugging binsearchindex
+  RecNumber = BINSEARCHINDEX(SSN, 2, NumRecords + 1)
+  WRITE(*, "(T20, A, I4)") "DEBUG, Record Number: ", RecNumber
+
 
   CLOSE(20)
 
