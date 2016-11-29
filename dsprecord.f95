@@ -2,24 +2,48 @@ SUBROUTINE DSPRECORD
   USE POLICE
   IMPLICIT NONE
 
-  !Initial Debugging print statements
-  !PRINT *, SSN
+  INTERFACE
+    FUNCTION GETSTABBREV(Code)
+      CHARACTER :: GETSTABBREV*2
+      INTEGER, INTENT(IN) :: Code
+    END FUNCTION GETSTABBREV
+
+    FUNCTION GETST(Code)
+      CHARACTER :: GETST*20
+      INTEGER, INTENT(IN) :: Code
+    END FUNCTION GETST
+
+    FUNCTION GETCTY(Code)
+      CHARACTER :: GETCTY*12
+      INTEGER, INTENT(IN) :: Code
+    END FUNCTION GETCTY
+
+    FUNCTION GETVTYPE(Code)
+      CHARACTER :: GETVTYPE*15
+      INTEGER, INTENT(IN) :: Code
+    END FUNCTION GETVTYPE
+
+  END INTERFACE
+
+  CHARACTER :: StateAbbrev*2, State*20, County*12, VType*15
+
+  StateAbbrev = GETSTABBREV(IStCode)
+  State = GETST(IStCode)
+  County = GETCTY(ICtyCode)
+  VType = GETVTYPE(IVtCode)
+
   WRITE(*, "(T20, A3, A1, A2, A1, A4)") SSN(1:3), '-', SSN(4:5), '-', SSN(6:9)
-
-  !PRINT *, Name
-  WRITE(*, "(T20, A20)")                Name
+  WRITE(*, "(T20, A20/)")                Name
 
 
-  !PRINT *, Street
-  WRITE(*, "(/T20, A30)") Street
+  WRITE(*, "(T20, A30)") Street
+  WRITE(*, "(T20, A19, A1, 1X, A2, 1X, A5, A1, A4/)") City, ",", StateAbbrev, Zip(1:5), '-', Zip(6:9)
 
-  !PRINT *, City
-  WRITE(*, "(T20, A19, A1, 1X, A2, 1X, A5, A1, A4)") City, ",", "XX", Zip(1:5), '-', Zip(6:9)
-  !PRINT *, Zip
+  WRITE(*, "(T20,A)") "Vehicle Information"
+    WRITE(*, "(T25, A, I2.2, A, A20)") "State: (", IStCode, ")", State
+    WRITE(*, "(T25, A, I2.2, A, A12)") "County: (", ICtyCode, ")", County
+    WRITE(*, "(T25, A, I2.2, A, A15)") "Type: (", IVtCode, ")", VType 
 
-  PRINT *, IStCode
-  PRINT *, ICtyCode
-  PRINT *, IVtCode
   PRINT *, IVmCode
   PRINT *, TcCode
   PRINT *, BcCode

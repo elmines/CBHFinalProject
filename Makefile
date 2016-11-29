@@ -8,7 +8,7 @@ bubble.o \
 bsearch.o \
 police.o \
 dspstate.o dspcounty.o dspvmake.o dspvtype.o dspcolor.o \
-dsprecord.o \
+dsprecord.o getstabbrev.o getst.o getcty.o getvtype.o \
 
 cbhproj: $(OBJ)
 	$(CC) -o cbhproj $(OBJ)
@@ -86,6 +86,18 @@ dspcolor.o: dspcolor.f95
 
 dsprecord.o: dsprecord.f95
 	$(CC) -c dsprecord.f95
+
+getstabbrev.o: getstabbrev.f95
+	$(CC) -c getstabbrev.f95
+
+getst.o: getst.f95
+	$(CC) -c getst.f95
+
+getcty.o: getcty.f95
+	$(CC) -c getcty.f95
+
+getvtype.o: getvtype.f95
+	$(CC) -c getvtype.f95
 
 clean:
 	rm cbhproj *.o *.mod *.db core
