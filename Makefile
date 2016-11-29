@@ -6,10 +6,16 @@ opt1.o opt2.o dspmenu2.o opt3.o opt4.o opt5.o opt6.o opt7.o \
 ldstate.o ldcounty.o ldvmake.o ldvtype.o ldcolor.o ldmaster.o \
 bubble.o \
 bsearch.o \
+police.o \
 dspstate.o dspcounty.o dspvmake.o dspvtype.o dspcolor.o \
+
 
 cbhproj: $(OBJ)
 	$(CC) -o cbhproj $(OBJ)
+
+police.o police.mod: police.f95
+	$(CC) -c police.f95
+
 
 cbhproj.o: cbhproj.f95
 	$(CC) -c cbhproj.f95
@@ -60,7 +66,7 @@ ldmaster.o: ldmaster.f95
 bubble.o: bubble.f95
 	$(CC) -c bubble.f95
 
-bsearch.o: bsearch.f95
+bsearch.o: bsearch.f95 police.o police.mod
 	$(CC) -c bsearch.f95
 
 dspstate.o: dspstate.f95
@@ -79,4 +85,4 @@ dspcolor.o: dspcolor.f95
 	$(CC) -c dspcolor.f95
 
 clean:
-	rm cbhproj *.o *.db core
+	rm cbhproj *.o *.mod *.db core

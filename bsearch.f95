@@ -22,8 +22,8 @@ INTEGER FUNCTION BSEARCH (SearchSSN)
     READ(20, 100, Rec = Mid) SSN, Name, Street, City, Zip, IStCode, ICtyCode, IVtCode, TcCode, IVmCode, BcCode, Tag
 100   FORMAT(                A9 , A20 , A30   , A19 , A9 , 6I2,                                                 A9)
 
-    IF (SearchSSN < SSN) Last = Mid - 1
-    IF (SearchSSN > SSN) First = Mid + 1
+    IF (SearchSSN < SSN) High = Mid - 1
+    IF (SearchSSN > SSN) Low = Mid + 1
     
     IF (SearchSSN == SSN) THEN
       BSEARCH = Mid

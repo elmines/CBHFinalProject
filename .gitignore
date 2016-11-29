@@ -2,5 +2,6 @@ cbhproj
 *.out
 *.exe
 *.o
+*.mod
 *.data
 *.db
