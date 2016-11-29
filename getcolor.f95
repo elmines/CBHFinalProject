@@ -16,11 +16,13 @@ FUNCTION GETCOLOR(Code)
 
   IF (Code < 1 .OR. Code > NumRecords) THEN
     GETCOLOR = "**"
+    CLOSE(21)
     RETURN
   END IF
 
   READ(21, "(A25)", REC = Code + 1) Data
   GETCOLOR = Data
 
+  CLOSE(21)
   RETURN
 END FUNCTION GETCOLOR 

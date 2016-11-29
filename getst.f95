@@ -16,11 +16,13 @@ FUNCTION GETST(Code)
 
   IF (Code < 1 .OR. Code > NumRecords) THEN
     GETST = "**"
+    CLOSE(21)
     RETURN
   END IF
 
   READ(21, "(A22)", REC = Code + 1) Data
   GETST = Data(3:22)
 
+  CLOSE(21)
   RETURN
 END FUNCTION GETST 

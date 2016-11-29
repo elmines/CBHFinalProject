@@ -16,11 +16,13 @@ FUNCTION GETSTABBREV(Code)
 
   IF (Code < 1 .OR. Code > NumRecords) THEN
     GETSTABBREV = "**"
+    CLOSE(21)
     RETURN
   END IF
 
   READ(21, "(A22)", REC = Code + 1) Data
   GETSTABBREV = Data(1:2)
 
+  CLOSE(21)
   RETURN
 END FUNCTION GETSTABBREV 

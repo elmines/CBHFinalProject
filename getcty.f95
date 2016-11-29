@@ -16,11 +16,13 @@ FUNCTION GETCTY(Code)
 
   IF (Code < 0 .OR. Code > NumRecords - 1) THEN
     GETCTY = "**"
+    CLOSE(21)
     RETURN
   END IF
 
   READ(21, "(A22)", REC = Code + 2) Data
   GETCTY = Data
 
+  CLOSE(21)
   RETURN
 END FUNCTION GETCTY 

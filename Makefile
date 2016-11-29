@@ -8,7 +8,7 @@ bubble.o \
 bsearch.o \
 police.o \
 dspstate.o dspcounty.o dspvmake.o dspvtype.o dspcolor.o \
-dsprecord.o getstabbrev.o getst.o getcty.o getvtype.o getcolor.o \
+dsprecord.o getstabbrev.o getst.o getcty.o getvtype.o getvmake.o getcolor.o \
 
 cbhproj: $(OBJ)
 	$(CC) -o cbhproj $(OBJ)
@@ -98,6 +98,9 @@ getcty.o: getcty.f95
 
 getvtype.o: getvtype.f95
 	$(CC) -c getvtype.f95
+
+getvmake.o: getvmake.f95
+	$(CC) -c getvmake.f95
 
 getcolor.o: getcolor.f95
 	$(CC) -c getcolor.f95

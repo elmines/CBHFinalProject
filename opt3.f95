@@ -48,9 +48,10 @@ SUBROUTINE OPT3
      CYCLE
     END IF
 
+    PRINT * !Extra line before displaying the record
     CALL DSPRECORD
 
-    WRITE(*, "(/T15, A)", advance="no") "Press Enter to continue . . ."
+    WRITE(*, "(/T20, A)", advance="no") "Press Enter to continue . . ."
     READ *
   END DO
 
