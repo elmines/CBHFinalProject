@@ -5,7 +5,7 @@ OBJ=cbhproj.o dspmenu.o \
 opt1.o opt2.o dspmenu2.o opt3.o opt4.o opt5.o opt6.o opt7.o \
 ldstate.o ldcounty.o ldvmake.o ldvtype.o ldcolor.o ldmaster.o \
 bubble.o \
-binsearchrec.o binsearchindex.o \
+bsearch.o \
 dspstate.o dspcounty.o dspvmake.o dspvtype.o dspcolor.o \
 
 cbhproj: $(OBJ)
@@ -60,11 +60,8 @@ ldmaster.o: ldmaster.f95
 bubble.o: bubble.f95
 	$(CC) -c bubble.f95
 
-binsearchrec.o: binsearchrec.f95
-	$(CC) -c binsearchrec.f95
-
-binsearchindex.o: binsearchindex.f95
-	$(CC) -c binsearchindex.f95
+bsearch.o: bsearch.f95
+	$(CC) -c bsearch.f95
 
 dspstate.o: dspstate.f95
 	$(CC) -c dspstate.f95
