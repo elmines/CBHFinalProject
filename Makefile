@@ -8,7 +8,7 @@ bubble.o \
 bsearch.o \
 police.o \
 dspstate.o dspcounty.o dspvmake.o dspvtype.o dspcolor.o \
-
+dsprecord.o \
 
 cbhproj: $(OBJ)
 	$(CC) -o cbhproj $(OBJ)
@@ -83,6 +83,9 @@ dspvtype.o: dspvtype.f95
 
 dspcolor.o: dspcolor.f95
 	$(CC) -c dspcolor.f95
+
+dsprecord.o: dsprecord.f95
+	$(CC) -c dsprecord.f95
 
 clean:
 	rm cbhproj *.o *.mod *.db core

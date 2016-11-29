@@ -39,14 +39,16 @@ SUBROUTINE OPT3
       SSN = ReadSSN(1:9)
     END IF
 
-
-    !Code for debugging binsearchindex
     RecNumber = BSEARCH(SSN)
-    WRITE(*, "(T20, A, I4)") "DEBUG, Record Number: ", RecNumber
-    IF (RecNumber /= -1) THEN
-      READ(20, "(A106)", REC = RecNumber) Record
-      WRITE(*, "(T20, A)") "Record: ", Record
+
+    IF (RecNumber == -1) THEN
+      WRITE(*, "(/T20, 3A)") "SSN ", ReadSSN, " not found."
+      WRITE(*, "(/T15, A)", advance="no") "Press Enter to continue . . ."
+       READ *
+     CYCLE
     END IF
+
+    CALL DSPRECORD
 
     WRITE(*, "(/T15, A)", advance="no") "Press Enter to continue . . ."
     READ *
