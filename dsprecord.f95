@@ -3,63 +3,63 @@ SUBROUTINE DSPRECORD
   IMPLICIT NONE
 
   INTERFACE
-    FUNCTION GETSTABBREV(Code)
-      CHARACTER :: GETSTABBREV*2
-      INTEGER, INTENT(IN) :: Code
-    END FUNCTION GETSTABBREV
 
-    FUNCTION GETST(Code)
-      CHARACTER :: GETST*20
-      INTEGER, INTENT(IN) :: Code
-    END FUNCTION GETST
+    SUBROUTINE GETST(State)
+      CHARACTER, INTENT(OUT) :: State*22
+    END SUBROUTINE GETST
 
-    FUNCTION GETCTY(Code)
-      CHARACTER :: GETCTY*12
-      INTEGER, INTENT(IN) :: Code
-    END FUNCTION GETCTY
+    SUBROUTINE GETCTY(County)
+      CHARACTER, INTENT(OUT) :: County*12
+    END SUBROUTINE GETCTY
 
-    FUNCTION GETVTYPE(Code)
-      CHARACTER :: GETVTYPE*15
-      INTEGER, INTENT(IN) :: Code
-    END FUNCTION GETVTYPE
+    SUBROUTINE GETVTYPE(Vtype)
+      CHARACTER, INTENT(OUT) :: Vtype*15
+    END SUBROUTINE GETVTYPE
 
-    FUNCTION GETVMAKE(Code)
-      CHARACTER :: GETVMAKE*11
-      INTEGER, INTENT(IN) :: Code
-    END FUNCTION
+    SUBROUTINE GETVMAKE(Vmake)
+      CHARACTER, INTENT(OUT) :: Vmake*11
+    END SUBROUTINE GETVMAKE
 
-    FUNCTION GETCOLOR(Code)
-      CHARACTER :: GETCOLOR*25
-      INTEGER, INTENT(IN) :: Code
-    END FUNCTION GETCOLOR
+    SUBROUTINE GETCOLOR(TopColor, BottomColor)
+      CHARACTER, INTENT(OUT) :: TopColor*25, BottomColor*25
+    END SUBROUTINE GETCOLOR
+
   END INTERFACE
 
-  CHARACTER :: StateAbbrev*2, State*20, County*12, VType*15, VMake*11, TColor*25, BColor*25
+  CHARACTER :: State*22, County*12, VType*15, VMake*11, TopColor*25, BottomColor*25
 
-  StateAbbrev = GETSTABBREV(IStCode)
-  State = GETST(IStCode)
-  County = GETCTY(ICtyCode)
-  VType = GETVTYPE(IVtCode)
-  VMake = GETVMAKE(IVmCode)
-  TColor = GETCOLOR(TcCode)
-  BColor = GETCOLOR(BcCode)
+  CALL GETST(State)
+  CALL GETCTY(County)
+  CALL GETVTYPE(VType)
+  CALL GETVMAKE(VMake)
+  CALL GETCOLOR(TopColor, BottomColor)
 
-  WRITE(*, "(T20, A3, A1, A2, A1, A4)") SSN(1:3), '-', SSN(4:5), '-', SSN(6:9)
-  WRITE(*, "(T20, A20)")                Name
+  WRITE(*, 100) SSN(1:3),SSN(4:5), SSN(6:9)
+100 FORMAT(T21, "SSN: ", A3, '-', A2, '-', A4)
 
-  WRITE(*, "(/T20, A30)") Street
-  WRITE(*, "(T20, A19, A1, 1X, A2, 1X, A5, A1, A4)") City, ",", StateAbbrev, Zip(1:5), '-', Zip(6:9)
+  WRITE(*, 200 ) Name
+200 FORMAT(T20, "Name: ", A20)
 
-  WRITE(*, "(/T20,A)") "Vehicle Information"
-    WRITE(*, "(T25, A, I2.2, A, A20)") "State: (", IStCode, ")", State
-    WRITE(*, "(T25, A, I2.2, A, A12)") "County: (", ICtyCode, ")", County
-    WRITE(*, "(T25, A, I2.2, A, A15)") "Type: (", IVtCode, ")", VType 
-    WRITE(*, "(T25, A, I2.2, A, A11)") "Make: (", IVmCode, ")", VMake
+  WRITE(*, 300) Street, City, State(1:2), Zip(1:5), Zip(6:9)
+300 FORMAT(/T20, A30, /T20 A19, ", ", A2, 1X, A5, '-', A4/) 
 
-    WRITE(*, "(/T25, A)") "Color"
-      WRITE(*, "(T30, A, I2.2, A, A25)") "Top: (", TcCode, ")", TColor
-      WRITE(*, "(T30, A, I2.2, A, A25)") "Bottom: (", BcCode, ")", BColor
+    WRITE(*, 400) IStCode, State(3:22)
+400   FORMAT(T27, "State: [", I2.2, ']', 1X,A20)
 
-    WRITE(*, "(/T25, A, A7)") "License Plate: ", Tag
+    WRITE(*, 500) ICtyCode, County
+500   FORMAT(T26, "County: [", I2.2, ']', 1X,A12)
+
+    WRITE(*, 600) IVtCode, VType
+600   FORMAT(T28, "Type: [", I2.2, ']', 1X,A15)
+
+    WRITE(*, 700) IVmCode, VMake
+700   FORMAT(T28, "Make: [", I2.2, ']', 1X, A11)
+
+    WRITE(*, 800) TcCode, TopColor(1:3), TopColor(4:25), BcCode, BottomColor(1:3), BottomColor(4:25)
+800   FORMAT(T23, "Top Color: [", I2.2, "]",  1X, A3, 1X, A22/, &
+             T20, "Bottom Color: [", I2.2, "]", 1X, A3, 1X, A22)
+
+    WRITE(*, 900) Tag
+900   FORMAT(T29, "Tag:", 6X, A7)
 
 END SUBROUTINE DSPRECORD

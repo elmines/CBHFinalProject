@@ -1,28 +1,25 @@
-FUNCTION GETVTYPE(Code)
+SUBROUTINE GETVTYPE(Vtype)
+  USE POLICE
   IMPLICIT NONE
 
   !Interface variables
-  CHARACTER :: GETVTYPE*15
-  INTEGER, INTENT(IN) :: Code
+  CHARACTER, INTENT(OUT) :: Vtype*15
 
   !Private variables
-  INTEGER, PARAMETER :: RecordLength = 15
   INTEGER :: NumRecords
-  CHARACTER(RecordLength) :: Data
 
 
-  OPEN(21, FILE = "vtype.db", FORM = "FORMATTED", ACCESS = "DIRECT", RECL = RecordLength)
+  OPEN(21, FILE = "vtype.db", FORM = "FORMATTED", ACCESS = "DIRECT", RECL = 15)
   READ(21, "(I2)", REC = 1) NumRecords
 
-  IF (Code < 1 .OR. Code > NumRecords) THEN
-    GETVTYPE = "**"
+  IF (IVtCode < 1 .OR. IVtCode > NumRecords) THEN
+    Vtype = "***************"
     CLOSE(21)
     RETURN
   END IF
 
-  READ(21, "(A15)", REC = Code + 1) Data
-  GETVTYPE = Data
+  READ(21, "(A15)", REC = IVtCode + 1) Vtype
 
   CLOSE(21)
   RETURN
-END FUNCTION GETVTYPE 
+END SUBROUTINE GETVTYPE 

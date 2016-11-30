@@ -1,28 +1,25 @@
-FUNCTION GETST(Code)
+SUBROUTINE GETST(State)
+  USE POLICE
   IMPLICIT NONE
 
   !Interface variables
-  CHARACTER :: GETST*20
-  INTEGER, INTENT(IN) :: Code
+  CHARACTER, INTENT(OUT) :: State*22
 
   !Private variables
-  INTEGER, PARAMETER :: RecordLength = 22
   INTEGER :: NumRecords
-  CHARACTER(RecordLength) :: Data
 
 
-  OPEN(21, FILE = "state.db", FORM = "FORMATTED", ACCESS = "DIRECT", RECL = RecordLength)
+  OPEN(21, FILE = "state.db", FORM = "FORMATTED", ACCESS = "DIRECT", RECL = 22)
   READ(21, "(I2)", REC = 1) NumRecords
 
-  IF (Code < 1 .OR. Code > NumRecords) THEN
-    GETST = "**"
+  IF (IStCode < 1 .OR. IStCode > NumRecords) THEN
+    State = "**********************"
     CLOSE(21)
     RETURN
   END IF
 
-  READ(21, "(A22)", REC = Code + 1) Data
-  GETST = Data(3:22)
+  READ(21, "(A22)", REC = IStCode + 1) State
 
   CLOSE(21)
   RETURN
-END FUNCTION GETST 
+END SUBROUTINE GETST 

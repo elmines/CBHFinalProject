@@ -1,28 +1,25 @@
-FUNCTION GETCTY(Code)
+SUBROUTINE GETCTY(County)
+  USE POLICE
   IMPLICIT NONE
 
   !Interface variables
-  CHARACTER :: GETCTY*12
-  INTEGER, INTENT(IN) :: Code
+  CHARACTER, INTENT(OUT) :: County*12
 
   !Private variables
-  INTEGER, PARAMETER :: RecordLength = 12
   INTEGER :: NumRecords
-  CHARACTER(RecordLength) :: Data
 
 
-  OPEN(21, FILE = "county.db", FORM = "FORMATTED", ACCESS = "DIRECT", RECL = RecordLength)
+  OPEN(21, FILE = "county.db", FORM = "FORMATTED", ACCESS = "DIRECT", RECL = 12)
   READ(21, "(I2)", REC = 1) NumRecords
 
-  IF (Code < 0 .OR. Code > NumRecords - 1) THEN
-    GETCTY = "**"
+  IF (ICtyCode < 0 .OR. ICtyCode > NumRecords - 1) THEN
+    County = "************"
     CLOSE(21)
     RETURN
   END IF
 
-  READ(21, "(A22)", REC = Code + 2) Data
-  GETCTY = Data
+  READ(21, "(A12)", REC = ICtyCode + 2) County
 
   CLOSE(21)
   RETURN
-END FUNCTION GETCTY 
+END SUBROUTINE GETCTY 
