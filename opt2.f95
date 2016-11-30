@@ -25,7 +25,7 @@ SUBROUTINE OPT2
       CASE ('5')
         CALL SYSTEM("clear")
         CALL DSPCOLOR
-      CASE ('6', 'Q', 'q', 'E', 'e')
+      CASE ('6', 'Q', 'q')
         EXIT 
       CASE DEFAULT
         WRITE (*, "(/T20, A)") "Invalid option selected."

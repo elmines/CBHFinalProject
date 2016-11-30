@@ -24,7 +24,7 @@ PROGRAM CBHPROJ
         CALL OPT6
       CASE ('7')
         CALL OPT7
-      CASE ('8', 'Q', 'q', 'E', 'e')
+      CASE ('8', 'Q', 'q')
         EXIT
       CASE DEFAULT
         WRITE (*, "(/T20, A)") "Invalid option selected."
