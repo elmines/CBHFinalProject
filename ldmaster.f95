@@ -50,6 +50,6 @@ SUBROUTINE LDMASTER
   CLOSE(20)
 
 !FIXME: Have the format code set to I4 rather than I4.4; need to check which is better.
-  WRITE(*, "(A, I4.4)") "Master Records Written: ", Counter
+  WRITE(*, "(T15, A, I4.4)") "Master Records Written: ", Counter
 
 END SUBROUTINE LDMASTER

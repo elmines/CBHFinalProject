@@ -31,7 +31,7 @@ SUBROUTINE LDCOUNTY
 300  Format(I2.2)
 
   WRITE(*, 400) Records, BadRecords
-400 Format(T15, "County Records Written: ", I2.2, T50, "Bad Records: ", I2.2)
+400 Format(T15, "County Records Written: ", I4.4, T50, "Bad Records: ", I2.2)
 
   CLOSE(7)
   CLOSE(8)
