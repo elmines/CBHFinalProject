@@ -42,7 +42,7 @@ opt5.o: opt5.f95
 opt6.o: opt6.f95
 	$(CC) -c opt6.f95
 
-opt7.o: opt7.f95
+opt7.o: opt7.f95 police.o police.mod 
 	$(CC) -c opt7.f95
 
 ldstate.o: ldstate.f95
