@@ -29,10 +29,9 @@ SUBROUTINE OPT2
         EXIT 
       CASE DEFAULT
         WRITE (*, "(/T20, A)") "Invalid option selected."
+    END SELECT
         WRITE (*, "(/T20, A)", advance="no") "Press Enter to continue . . ."
         READ *
-    END SELECT
     CALL SYSTEM("clear")
   END DO
-  CALL SYSTEM("clear")
 END SUBROUTINE OPT2

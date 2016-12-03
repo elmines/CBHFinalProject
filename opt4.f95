@@ -9,6 +9,7 @@ SUBROUTINE OPT4
   END INTERFACE
 
 
+  CHARACTER(*), PARAMETER :: Title = "* * * Police Information System Add Record * * *"
   CHARACTER :: ReadSSN*11, NewSSN*9, Opt*1
   INTEGER :: NumRecords
 
@@ -20,10 +21,10 @@ SUBROUTINE OPT4
 
   DO 
     CALL SYSTEM("clear")
-    WRITE (*, "(/T15, A/)") "* * * Police Information System Add Record * * *"
+    WRITE (*, "(/T15, A/)") Title
 
     WRITE (*, 50, advance = "no") "Enter a Social Security Number or Q to exit: "
-50    FORMAT(/T21, A)
+50    FORMAT(/T20, A)
     READ(*, "(A11)") ReadSSN
 
     !User wants to quit?
@@ -45,10 +46,10 @@ SUBROUTINE OPT4
     IF (RecNumber /= -1) THEN
 
       IF (ReadSSN(4:4) == '-') THEN
-        WRITE(*, "(/T21, A, A11, A)") "Error: SSN ", ReadSSN, " already exists."
+        WRITE(*, "(/T20, A, A11, A)") "Error: SSN ", ReadSSN, " already exists."
       ELSE
         WRITE(*, 100) ReadSSN(1:3), ReadSSN(4:5), ReadSSN(6:9) 
-100     FORMAT(/T21, "Error: SSN ", A3, '-', A2, '-', A4, " already exists.")
+100     FORMAT(/T20, "Error: SSN ", A3, '-', A2, '-', A4, " already exists.")
       END IF
 
       WRITE(*, 50, advance="no") "Press Enter to continue . . ."
@@ -70,31 +71,40 @@ SUBROUTINE OPT4
     WRITE(*, 50, advance="no") "Enter a ZIP Code (XXXXX-XXXX): "
       READ(*, "(A5, 1X, A4)") Zip(1:5), Zip(6:9)
 
+    CALL SYSTEM("clear")
     CALL DSPSTATE
     WRITE(*, 50, advance="no") "Enter a state code (01-51): "
       READ(*, "(I2.2)") IStCode
 
+    CALL SYSTEM("clear")
     CALL DSPCOUNTY
-    WRITE(*, 50, advance="no") "Enter a county code: "
+    WRITE(*, 50, advance="no") "Enter a county code (00-67): "
       READ(*, "(I2.2)") ICtyCode
 
+    CALL SYSTEM("clear")
     CALL DSPVTYPE
-    WRITE(*, 50, advance="no") "Enter a type code: "
+    WRITE(*, 50, advance="no") "Enter a type code (01-15): "
       READ(*, "(I2.2)") IVtCode
 
+    CALL SYSTEM("clear")
     CALL DSPVMAKE
-    WRITE(*, 50, advance="no") "Enter a make code: "
+    WRITE(*, 50, advance="no") "Enter a make code (01-51): "
       READ(*, "(I2.2)") IVmCode
 
+    CALL SYSTEM("clear")
     CALL DSPCOLOR
-    WRITE(*, 50, advance="no") "Enter a top color code: "
+    WRITE(*, 50, advance="no") "Enter a top color code (01-31): "
       READ(*, "(I2.2)") TcCode
-    WRITE(*, 50, advance="no") "Enter a bottom color code: "
+    WRITE(*, 50, advance="no") "Enter a bottom color code (01-31): "
       READ(*, "(I2.2)") BcCode
 
+    CALL SYSTEM("clear")
+    WRITE (*, "(/T15, A/)") Title
     WRITE(*, 50, advance="no") "Enter a tag of up to 7 characteres: "
       READ(*, "(A7)") Tag
 
+    CALL SYSTEM("clear")
+    WRITE (*, "(/T15, A/)") Title
     CALL DSPRECORD
     WRITE(*, 50, advance ="no") "Are you sure you want to add this record (y/n)? "
       READ(*, "(A1)") Opt

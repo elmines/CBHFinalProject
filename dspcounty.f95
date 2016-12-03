@@ -45,7 +45,4 @@ SUBROUTINE DSPCOUNTY
 
   CLOSE(7)
 
-  WRITE (*, "(/T10, A)", advance="no") "Press Enter to continue . . ."
-  READ *
-
 END SUBROUTINE DSPCOUNTY

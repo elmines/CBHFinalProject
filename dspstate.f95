@@ -46,7 +46,5 @@ SUBROUTINE DSPSTATE
 
   CLOSE(7)
 
-  WRITE (*, "(/T5, A)", advance="no") "Press Enter to continue . . ."
-  READ *
 
 END SUBROUTINE DSPSTATE

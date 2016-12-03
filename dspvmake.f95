@@ -46,7 +46,4 @@ SUBROUTINE DSPVMAKE
 
   CLOSE(7)
 
-  WRITE (*, "(/T20, A)", advance="no") "Press Enter to continue . . ."
-  READ *
-
 END SUBROUTINE DSPVMAKE

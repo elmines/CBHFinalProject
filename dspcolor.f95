@@ -46,7 +46,4 @@ SUBROUTINE DSPCOLOR
 
   CLOSE(7)
 
-  WRITE (*, "(/T15, A)", advance="no") "Press Enter to continue . . ."
-  READ *
-
 END SUBROUTINE DSPCOLOR
