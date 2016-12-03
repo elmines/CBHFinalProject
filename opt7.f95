@@ -11,7 +11,7 @@ SUBROUTINE OPT7
   CALL SYSTEM("clear")
   WRITE (*, "(/T15, A/)") Title
   WRITE(*, 100)
-100  FORMAT(T5, "SSN", 10X, "Name", 18X, "Street", 33X, "County", 8X, "Type", 13X, "Make", 9X, "Top Color", 15X, "Bottom Color")
+100  FORMAT(T5, "SSN", 10X, "Name", 18X, "Address", 32X, "County", 8X, "Type", 13X, "Make", 9X, "Top Color", 15X, "Bottom Color")
   WRITE(*, 300)
 300   FORMAT(T5, 164('=') )
 
