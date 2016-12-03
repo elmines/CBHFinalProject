@@ -11,9 +11,10 @@ SUBROUTINE OPT7
   CALL SYSTEM("clear")
   WRITE (*, "(/T15, A/)") Title
   WRITE(*, 100)
-100  FORMAT(T5, "SSN", 10X, "Name", 18X, "Address", 32X, "County", 8X, "Type", 13X, "Make", 9X, "Top Color", 15X, "Bottom Color")
+100  FORMAT(T5, "SSN", 10X, "Name", 18X, "Address", 32X, "County", 8X, "Type", 13X, "Make", 9X, "Top Color", 15X, "Bottom Color",&
+       12X, "Tag")
   WRITE(*, 300)
-300   FORMAT(T5, 164('=') )
+300   FORMAT(T5, 173('=') )
 
   OPEN(20, FILE = "master.db", FORM = "FORMATTED", ACCESS = "DIRECT", RECL = 106)
   READ(20, "(I4)", REC = 1) NumRecords

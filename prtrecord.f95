@@ -34,11 +34,11 @@ SUBROUTINE PRTRECORD
   CALL GETVMAKE(VMake)
   CALL GETCOLOR(TopColor, BottomColor)
 
-  WRITE(*, 200) SSN(1:3), SSN(4:5), SSN(6:9), Name, Street, County, VType, VMake, TopColor(4:25), BottomColor(4:25),&
+  WRITE(*, 200) SSN(1:3), SSN(4:5), SSN(6:9), Name, Street, County, VType, VMake, TopColor(4:25), BottomColor(4:25), Tag,&
                       City, State(1:2), Zip(1:5), Zip(6:9)
 
 
-200 FORMAT(T5, A3, '-', A2, '-', A4, 2X, A20, 2X,  A30, 9X, A12, 2X   A15, 2X, A11, 2X, A22, 2X,  A22,&
+200 FORMAT(T5, A3, '-', A2, '-', A4, 2X, A20, 2X,  A30, 9X, A12, 2X   A15, 2X, A11, 2X, A22, 2X,  A22, 2X, A7&
                       /T40,         A19, ', ', A2, 1X, A5, '-', A4 )
 
 END SUBROUTINE PRTRECORD
