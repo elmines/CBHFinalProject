@@ -33,7 +33,7 @@ dspmenu2.o: dspmenu2.f95
 
 opt3.o: opt3.f95
 	$(CC) -c opt3.f95
-opt4.o: opt4.f95
+opt4.o: opt4.f95 police.o police.mod
 	$(CC) -c opt4.f95
 
 opt5.o: opt5.f95
