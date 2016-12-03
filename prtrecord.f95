@@ -38,7 +38,7 @@ SUBROUTINE PRTRECORD
                       City, State(1:2), Zip(1:5), Zip(6:9)
 
 
-200 FORMAT(A3, '-', A2, '-', A4, 2X, A20, 2X,  A30, 9X, A12, 2X   A15, 2X, A11, 2X, A22, 2X,  A22,&
-                      /T36,         A19, ', ', A2, 1X, A5, '-', A4 )
+200 FORMAT(T5, A3, '-', A2, '-', A4, 2X, A20, 2X,  A30, 9X, A12, 2X   A15, 2X, A11, 2X, A22, 2X,  A22,&
+                      /T40,         A19, ', ', A2, 1X, A5, '-', A4 )
 
 END SUBROUTINE PRTRECORD
