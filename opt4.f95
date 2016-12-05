@@ -68,35 +68,69 @@ SUBROUTINE OPT4
     WRITE(*, 50, advance="no") "Enter a city of up to 19 characters: "
       READ(*, "(A19)") City
 
+    !What format did Darren want the ZIP Code read in as?
     WRITE(*, 50, advance="no") "Enter a ZIP Code (XXXXX-XXXX): "
       READ(*, "(A5, 1X, A4)") Zip(1:5), Zip(6:9)
 
-    CALL SYSTEM("clear")
-    CALL DSPSTATE
-    WRITE(*, 50, advance="no") "Enter a state code (01-51): "
-      READ(*, "(I2.2)") IStCode
+    DO
+      CALL SYSTEM("clear")
+      CALL DSPSTATE
+      WRITE(*, 50, advance="no") "Enter a state code (01-51): "
+        READ(*, "(I2.2)") IStCode
+      IF (1 <= IStCode .AND. IStCode <= 51) EXIT
+      WRITE(*, 50, advance = "no") "Invalid state code. Press Enter to continue. . ."
+      READ *
+    END DO
 
-    CALL SYSTEM("clear")
-    CALL DSPCOUNTY
-    WRITE(*, 50, advance="no") "Enter a county code (00-67): "
-      READ(*, "(I2.2)") ICtyCode
+    DO
+      CALL SYSTEM("clear")
+      CALL DSPCOUNTY
+      WRITE(*, 50, advance="no") "Enter a county code (00-67): "
+        READ(*, "(I2.2)") ICtyCode
+      IF (0 <= ICtyCode .AND. ICtyCode <= 67) EXIT
+      WRITE(*, 50, advance = "no") "Invalid county code. Press Enter to continue. . ."
+      READ *
+    END DO
 
-    CALL SYSTEM("clear")
-    CALL DSPVTYPE
-    WRITE(*, 50, advance="no") "Enter a type code (01-15): "
-      READ(*, "(I2.2)") IVtCode
+    DO
+      CALL SYSTEM("clear")
+      CALL DSPVTYPE
+      WRITE(*, 50, advance="no") "Enter a type code (01-15): "
+        READ(*, "(I2.2)") IVtCode
+      IF (1 <= IVtCode .AND. IVtCode <= 15) EXIT
+      WRITE(*, 50, advance = "no") "Invalid type code. Press Enter to continue. . ."
+      READ *
+    END DO
 
-    CALL SYSTEM("clear")
-    CALL DSPVMAKE
-    WRITE(*, 50, advance="no") "Enter a make code (01-51): "
-      READ(*, "(I2.2)") IVmCode
+    DO
+      CALL SYSTEM("clear")
+      CALL DSPVMAKE
+      WRITE(*, 50, advance="no") "Enter a make code (01-51): "
+        READ(*, "(I2.2)") IVmCode
+      IF (1 <= IVmCode .AND. IVmCode <= 51) EXIT
+      WRITE(*, 50, advance = "no") "Invalid make code. Press Enter to continue. . ."
+      READ *
+    END DO
 
-    CALL SYSTEM("clear")
-    CALL DSPCOLOR
-    WRITE(*, 50, advance="no") "Enter a top color code (01-31): "
-      READ(*, "(I2.2)") TcCode
-    WRITE(*, 50, advance="no") "Enter a bottom color code (01-31): "
-      READ(*, "(I2.2)") BcCode
+    DO
+      CALL SYSTEM("clear")
+      CALL DSPCOLOR
+      WRITE(*, 50, advance="no") "Enter a top color code (01-31): "
+        READ(*, "(I2.2)") TcCode
+      IF (1 <= TcCode .AND. TcCode <= 31) EXIT
+      WRITE(*, 50, advance = "no") "Invalid color code. Press Enter to continue. . ."
+      READ *
+    END DO
+
+    DO
+      CALL SYSTEM("clear")
+      CALL DSPCOLOR
+      WRITE(*, 50, advance="no") "Enter a bottom color code (01-31): "
+        READ(*, "(I2.2)") BcCode
+      IF (1 <= BcCode .AND. BcCode <= 31) EXIT
+      WRITE(*, 50, advance = "no") "Invalid color code. Press Enter to continue. . ."
+      READ *
+    END DO
 
     CALL SYSTEM("clear")
     WRITE (*, "(/T15, A/)") Title
