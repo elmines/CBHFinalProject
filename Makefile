@@ -9,6 +9,7 @@ bsearch.o \
 police.o \
 dspstate.o dspcounty.o dspvmake.o dspvtype.o dspcolor.o \
 dsprecord.o prtrecord.o getst.o getcty.o getvtype.o getvmake.o getcolor.o \
+modmenu.o
 
 cbhproj: $(OBJ)
 	$(CC) -o cbhproj $(OBJ)
@@ -39,7 +40,7 @@ opt4.o: opt4.f95 police.o police.mod
 opt5.o: opt5.f95
 	$(CC) -c opt5.f95
 
-opt6.o: opt6.f95
+opt6.o: opt6.f95 police.o police.mod
 	$(CC) -c opt6.f95
 
 opt7.o: opt7.f95 police.o police.mod 
@@ -104,6 +105,9 @@ getvmake.o: getvmake.f95
 
 getcolor.o: getcolor.f95
 	$(CC) -c getcolor.f95
+
+modmenu.o: modmenu.f95
+	$(CC) -c modmenu.f95
 
 clean:
 	rm cbhproj *.o *.mod *.db core

@@ -1,7 +1,90 @@
 SUBROUTINE OPT6
-  CALL SYSTEM("clear")
-  WRITE (*, "(/T15, A/)") "* * * Police Information System Modify Record * * *"
-  WRITE (*, "(//T15, A//)") "User selected Option 6"
-  WRITE(*, "(/T15, A)", advance="no") "Press Enter to continue . . ."
-  READ *
+  USE POLICE
+  IMPLICIT NONE
+
+  INTERFACE
+    INTEGER FUNCTION BSEARCH(SSN)
+      CHARACTER, INTENT(IN) :: SSN*9
+    END FUNCTION BSEARCH
+
+!    INTEGER FUNCTION CLEANSEARCH(SSN)
+!      CHARACTER, INTENT(IN) :: SSN*9
+!    END FUNCTION CLEANSEARCH
+  END INTERFACE
+
+  CHARACTER(*), PARAMETER :: Title = "* * * Police Information System Modify Record * * *"
+
+  CHARACTER :: ReadSSN*11, SearchSSN*9, Opt*2
+  INTEGER :: NumRecords
+
+  INTEGER :: RecNumber
+
+  OPEN(20, FILE = "master.db", FORM = "FORMATTED", ACCESS = "DIRECT", RECL = 106)
+
+  DO
+    CALL SYSTEM("clear")
+    WRITE (*, "(/T15, A/)") Title
+
+    WRITE(*, "(/T20, A)", advance = "no") "Enter a Social Security Number of Q to exit: "
+      READ(*, "(A11)") ReadSSN
+
+    !User wants to quit?
+    SELECT CASE(ReadSSN(1:1))
+      CASE ('Q', 'q')
+        EXIT
+      CASE DEFAULT !Nothing for default case
+    END SELECT
+
+
+    IF (ReadSSN(4:4) == '-') THEN
+      SearchSSN = ReadSSN(1:3)//ReadSSN(5:6)//ReadSSN(8:11)
+    ELSE
+      SearchSSN = ReadSSN(1:9)
+    END IF
+
+    RecNumber = BSEARCH(SearchSSN)
+
+    IF (RecNumber == -1) THEN
+
+      IF (ReadSSN(4:4) == '-') THEN
+        WRITE(*, "(/T20, A, A11, A)") "SSN ", ReadSSN, " not found."
+      ELSE
+        WRITE(*, 100) ReadSSN(1:3), ReadSSN(4:5), ReadSSN(6:9) 
+100     FORMAT(/T20, "SSN ", A3, '-', A2, '-', A4, " not found.")
+      END IF
+
+      WRITE(*, "(/T20, A)", advance="no") "Press Enter to continue . . ."
+       READ *
+     CYCLE
+    END IF
+
+
+    DO
+      CALL SYSTEM("clear")      
+      WRITE (*, "(/T15, A/)") Title
+      PRINT *
+      CALL MODMENU
+
+      WRITE (*, "(/T20, A)", advance = "no") "Enter the item # to update, W to write, or C to cancel: "
+        READ(*, "(A2)") Opt
+
+      SELECT CASE(Opt)
+        CASE("C", "c")
+          WRITE(*, "(/T20, A)") "Record not written."
+          WRITE(*, "(/T20, A)", advance="no") "Press Enter to continue . . ."
+          READ *
+          EXIT !Exits mod submenu
+        CASE DEFAULT
+          WRITE(*, "(/T20, A)") "Invalid option selected."
+          WRITE(*, "(/T20, A)", advance="no") "Press Enter to continue . . ."
+          READ *
+      END SELECT
+    END DO
+
+
+  END DO !End Option 6 Do loop
+
+
+
+  CLOSE(20)
 END SUBROUTINE OPT6
