@@ -40,7 +40,7 @@ SUBROUTINE DSPCOUNTY
   WRITE(*, "(/T15, A/)") "* * * Police Information System Display Counties * * *"
 
   DO I = 1, NumRows
-    WRITE (*, "(T10, A100)") Line(I)
+    WRITE (*, "(T15, A100)") Line(I)
   END DO
 
   CLOSE(7)

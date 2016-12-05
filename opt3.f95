@@ -20,9 +20,9 @@ SUBROUTINE OPT3
 
   DO 
     CALL SYSTEM("clear")
-    WRITE (*, "(/T15, A//)") "* * * Police Information System [Display] * * *"
+    WRITE (*, "(/T15, A//)") "* * * Police Information System Display Record * * *"
 
-    WRITE (*, "(T20, A)", advance = "no") "Enter a Social Security Number or ""Q"" to exit: "
+    WRITE (*, "(T20, A)", advance = "no") "Enter a Social Security Number or Q to exit: "
     READ(*, "(A11)") ReadSSN
 
     !User wants to quit?
@@ -50,7 +50,7 @@ SUBROUTINE OPT3
 100     FORMAT(/T20, "SSN ", A3, '-', A2, '-', A4, " not found.")
       END IF
 
-      WRITE(*, "(/T15, A)", advance="no") "Press Enter to continue . . ."
+      WRITE(*, "(/T20, A)", advance="no") "Press Enter to continue . . ."
        READ *
      CYCLE
     END IF

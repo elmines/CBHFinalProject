@@ -2,7 +2,7 @@ SUBROUTINE OPT7
   USE POLICE
   IMPLICIT NONE
 
-  CHARACTER(*), PARAMETER :: Title = "* * * Police Information Display Records * * *"
+  CHARACTER(*), PARAMETER :: Title = "* * * Police Information System Display Records * * *"
 
   INTEGER :: NumRecords, I, Counter
   CHARACTER :: Opt*1
@@ -37,7 +37,7 @@ SUBROUTINE OPT7
 
       IF (I < NumRecords + 1) THEN
 
-        WRITE(*, "(/T5, A)", advance = "no") "Press Enter to continue or Q to quit: "
+        WRITE(*, "(/T20, A)", advance = "no") "Press Enter to continue or Q to quit: "
           READ(*, "(A1)") Opt
   
         IF (Opt == 'Q' .OR. Opt == 'q') THEN
@@ -57,7 +57,7 @@ SUBROUTINE OPT7
 
 
   IF (Counter /= 0) THEN
-    WRITE(*, "(/T5, A)", advance = "no") "Press Enter to continue . . ."
+    WRITE(*, "(/T20, A)", advance = "no") "Press Enter to continue . . ."
     READ *
   END IF
        
