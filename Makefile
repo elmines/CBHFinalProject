@@ -5,7 +5,7 @@ OBJ=cbhproj.o dspmenu.o \
 opt1.o opt2.o dspmenu2.o opt3.o opt4.o opt5.o opt6.o opt7.o \
 ldstate.o ldcounty.o ldvmake.o ldvtype.o ldcolor.o ldmaster.o \
 bubble.o \
-bsearch.o \
+bsearch.o cleansearch.o\
 police.o \
 dspstate.o dspcounty.o dspvmake.o dspvtype.o dspcolor.o \
 dsprecord.o prtrecord.o getst.o getcty.o getvtype.o getvmake.o getcolor.o \
@@ -69,6 +69,9 @@ bubble.o: bubble.f95
 
 bsearch.o: bsearch.f95 police.o police.mod
 	$(CC) -c bsearch.f95
+
+cleansearch.o: cleansearch.f95 police.o police.mod
+	$(CC) -c cleansearch.f95
 
 dspstate.o: dspstate.f95
 	$(CC) -c dspstate.f95
