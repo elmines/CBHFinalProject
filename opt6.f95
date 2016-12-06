@@ -86,7 +86,7 @@ SUBROUTINE OPT6
               SearchSSN = ReadSSN(1:9)
             END IF
 
-            TempRecNumber = CLEANSEARCH(ReadSSN)
+            TempRecNumber = CLEANSEARCH(SearchSSN)
             IF (TempRecNumber /= -1 .AND. TempRecNumber /= RecNumber) THEN
 
               IF (ReadSSN(4:4) == '-') THEN
@@ -100,8 +100,8 @@ SUBROUTINE OPT6
                 READ *
               CYCLE
             END IF
-          NewSSN = SearchSSN
-          SSN = NewSSN
+          NewSSN = SearchSSN !Use this to keep track of whether I need to call bubble later
+          SSN = NewSSN !Write the new SSN to the module
 
         CASE("2", "2.")
           WRITE(*, 100, advance="no") "Enter last name, first name (Smith, Joe) of up to 20 characters: "
