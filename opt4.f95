@@ -10,7 +10,7 @@ SUBROUTINE OPT4
 
 
   CHARACTER(*), PARAMETER :: Title = "* * * Police Information System Add Record * * *"
-  CHARACTER :: ReadSSN*11, NewSSN*9, Opt*1
+  CHARACTER :: ReadSSN*11, NewSSN*9, ReadZip*10, Opt*1
   INTEGER :: NumRecords
 
   INTEGER :: RecNumber
@@ -68,9 +68,13 @@ SUBROUTINE OPT4
     WRITE(*, 50, advance="no") "Enter a city of up to 19 characters: "
       READ(*, "(A19)") City
 
-    !What format did Darren want the ZIP Code read in as?
-    WRITE(*, 50, advance="no") "Enter a ZIP Code (XXXXX-XXXX): "
-      READ(*, "(A5, 1X, A4)") Zip(1:5), Zip(6:9)
+    WRITE(*, 50, advance="no") "Enter a 9-digit Zip code: "
+      READ(*, "(A10)") ReadZip
+      IF (ReadZip(6:6) == '-') THEN
+        Zip = ReadZip(1:5)//ReadZip(7:10)
+      ELSE
+        Zip = ReadZip
+      END IF
 
     DO
       CALL SYSTEM("clear")
