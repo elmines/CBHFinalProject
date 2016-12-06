@@ -11,9 +11,12 @@ SUBROUTINE OPT7
   CALL SYSTEM("clear")
   WRITE (*, "(/T15, A/)") Title
   WRITE(*, 100)
-100  FORMAT(T5, "SSN", 10X, "Name", 18X, "Address", 32X, "County", 8X, "Type", 13X, "Make", 9X, "Top Color", 15X, "Bottom Color",&
-       12X, "Tag")
+!100  FORMAT(T5, "SSN", 10X, "Name", 18X, "Address", 32X, "County", 8X, "Type", 13X, "Make", 9X, "Top Color", 15X, "Bottom Color",&
+!       12X, "Tag")
   WRITE(*, 300)
+  100  FORMAT("SSN", 10X, "Name", 18X, "Address", 33X, "County & State", 4X, "Vehicle", 14X, "Top Color", 23X,&
+              "Bottom Color", 23X, "Tag")
+
 300   FORMAT(T5, 173('=') )
 
   OPEN(20, FILE = "master.db", FORM = "FORMATTED", ACCESS = "DIRECT", RECL = 106)
@@ -28,7 +31,8 @@ SUBROUTINE OPT7
 
 
     CALL PRTRECORD
-    WRITE(*, 300)
+!    WRITE(*, 300)
+    PRINT *
 
     !PRINT * !Add a break between records
     Counter = Counter + 1
