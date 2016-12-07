@@ -14,7 +14,7 @@ SUBROUTINE OPT6
 
   CHARACTER(*), PARAMETER :: Title = "* * * Police Information System Modify Record * * *"
 
-  CHARACTER :: ReadSSN*11, SearchSSN*9, OldSSN*9, NewSSN*9, Opt*2
+  CHARACTER :: ReadSSN*11, SearchSSN*9, OldSSN*9, CurrentSSN*9, NewSSN*9, Opt*2
   CHARACTER :: ReadZip*10
   INTEGER :: NumRecords
 
@@ -46,6 +46,7 @@ SUBROUTINE OPT6
     END IF
 
     OldSSN = SearchSSN
+    CurrentSSN = SearchSSN !User to save an SSN before calling a bsearch
     NewSSN = SearchSSN !If the user never changes NewSSN, no sorting will be needed
     RecNumber = BSEARCH(SearchSSN)
 
@@ -88,6 +89,7 @@ SUBROUTINE OPT6
             END IF
 
             TempRecNumber = CLEANSEARCH(SearchSSN)
+            SSN = CurrentSSN !Prevents the SearchSSN from getting written to the module if it already exists in the master database
             IF (TempRecNumber /= -1 .AND. TempRecNumber /= RecNumber) THEN
 
               IF (ReadSSN(4:4) == '-') THEN
@@ -101,8 +103,9 @@ SUBROUTINE OPT6
                 READ *
               CYCLE
             END IF
+          CurrentSSN = SearchSSN
           NewSSN = SearchSSN !Use this to keep track of whether I need to call bubble later
-          SSN = NewSSN !Write the new SSN to the module
+          SSN = SearchSSN !Write the new SSN to the module
           ChangesMade = .TRUE.
           NewChanges = .TRUE.
 
