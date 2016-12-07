@@ -88,25 +88,25 @@ dspvtype.o: dspvtype.f95
 dspcolor.o: dspcolor.f95
 	$(CC) -c dspcolor.f95
 
-dsprecord.o: dsprecord.f95
+dsprecord.o: dsprecord.f95 police.o police.mod
 	$(CC) -c dsprecord.f95
 
-prtrecord.o: prtrecord.f95
+prtrecord.o: prtrecord.f95 police.o police.mod
 	$(CC) -c prtrecord.f95
 
-getst.o: getst.f95
+getst.o: getst.f95 police.o police.mod
 	$(CC) -c getst.f95
 
-getcty.o: getcty.f95
+getcty.o: getcty.f95 police.o police.mod
 	$(CC) -c getcty.f95
 
-getvtype.o: getvtype.f95
+getvtype.o: getvtype.f95 police.o police.mod
 	$(CC) -c getvtype.f95
 
-getvmake.o: getvmake.f95
+getvmake.o: getvmake.f95 police.o police.mod
 	$(CC) -c getvmake.f95
 
-getcolor.o: getcolor.f95
+getcolor.o: getcolor.f95 police.o police.mod
 	$(CC) -c getcolor.f95
 
 modmenu.o: modmenu.f95
