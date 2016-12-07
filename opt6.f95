@@ -19,6 +19,7 @@ SUBROUTINE OPT6
   INTEGER :: NumRecords
 
   INTEGER :: RecNumber, TempRecNumber
+  LOGICAL :: NewChanges = .FALSE., ChangesMade = .FALSE.    !Use to determine what message to display should the user opt to exit 
 
   OPEN(20, FILE = "master.db", FORM = "FORMATTED", ACCESS = "DIRECT", RECL = 106)
 
@@ -102,18 +103,26 @@ SUBROUTINE OPT6
             END IF
           NewSSN = SearchSSN !Use this to keep track of whether I need to call bubble later
           SSN = NewSSN !Write the new SSN to the module
+          ChangesMade = .TRUE.
+          NewChanges = .TRUE.
 
         CASE("2", "2.")
           WRITE(*, 100, advance="no") "Enter last name, first name (Smith, Joe) of up to 20 characters: "
             READ(*, "(A20)") Name
+          ChangesMade = .TRUE.
+          NewChanges = .TRUE.
 
         CASE("3", "3.")
           WRITE(*, 100, advance="no") "Enter street address of up to 30 characters: "
             READ(*, "(A30)") Street
+          ChangesMade = .TRUE.
+          NewChanges = .TRUE.
 
         CASE("4", "4.")
           WRITE(*, 100, advance="no") "Enter a city of up to 19 characters: "
             READ(*, "(A19)") City
+          ChangesMade = .TRUE.
+          NewChanges = .TRUE.
 
         CASE ("5", "5.")
             WRITE(*, 100, advance="no") "Enter a 9-digit Zip code: "
@@ -123,6 +132,8 @@ SUBROUTINE OPT6
               ELSE
                 Zip = ReadZip
               END IF
+          ChangesMade = .TRUE.
+          NewChanges = .TRUE.
 
         CASE("6", "6.")
           DO
@@ -134,6 +145,8 @@ SUBROUTINE OPT6
             WRITE(*, 100, advance = "no") "Invalid state code. Press Enter to continue. . ."
             READ *
           END DO
+          ChangesMade = .TRUE.
+          NewChanges = .TRUE.
 
         CASE("7", "7.")
           DO
@@ -145,6 +158,8 @@ SUBROUTINE OPT6
             WRITE(*, 100, advance = "no") "Invalid county code. Press Enter to continue. . ."
             READ *
           END DO
+          ChangesMade = .TRUE.
+          NewChanges = .TRUE.
 
         CASE("8", "8.")
           DO
@@ -156,6 +171,8 @@ SUBROUTINE OPT6
             WRITE(*, 100, advance = "no") "Invalid make code. Press Enter to continue. . ."
             READ *
           END DO
+          ChangesMade = .TRUE.
+          NewChanges = .TRUE.
 
         CASE("9", "9.")
           DO
@@ -167,6 +184,8 @@ SUBROUTINE OPT6
            WRITE(*, 100, advance = "no") "Invalid type code. Press Enter to continue. . ."
            READ *
          END DO
+          ChangesMade = .TRUE.
+          NewChanges = .TRUE.
 
         CASE("10")
           DO
@@ -178,6 +197,8 @@ SUBROUTINE OPT6
             WRITE(*, 100, advance = "no") "Invalid color code. Press Enter to continue. . ."
             READ *
           END DO
+          ChangesMade = .TRUE.
+          NewChanges = .TRUE.
 
         CASE("11")
           DO
@@ -189,23 +210,47 @@ SUBROUTINE OPT6
             WRITE(*, 100, advance = "no") "Invalid color code. Press Enter to continue. . ."
             READ *
           END DO
+          ChangesMade = .TRUE.
+          NewChanges = .TRUE.
 
         CASE("12")
           WRITE(*, 100, advance="no") "Enter a tag of up to 7 characteres: "
             READ(*, "(A7)") Tag
+          ChangesMade = .TRUE.
+          NewChanges = .TRUE.
 
         CASE("W", "w")
-          WRITE(20, 400, Rec = NumRecords + 2) NewSSN, Name, Street, City, Zip, IStCode, ICtyCode, IVtCode, TcCode, IVmCode,&
-                                               BcCode, Tag
-400         FORMAT(A9, A20, A30, A19, A9, 6I2.2, A7)
-          IF (SSN /= OldSSN) CALL BUBBLE
-          WRITE(*, 100) "Latest changes written."
+          IF (NewChanges) THEN
+            WRITE(20, 400, Rec = RecNumber) SSN, Name, Street, City, Zip, IStCode, ICtyCode, IVtCode, TcCode, IVmCode,&
+                                                 BcCode, Tag
+400           FORMAT(A9, A20, A30, A19, A9, 6I2.2, A7)
+
+            IF (SSN /= OldSSN) THEN
+              CALL BUBBLE
+              RecNumber = CLEANSEARCH(NewSSN) !Changes recnumber to correspond with the resorted data
+              OldSSN = NewSSN !Prevents unnecessary calls to bubble in certain cases where the user change the SSN more than once
+            END IF
+            
+            WRITE(*, 100) "Latest changes written."
+            NewChanges = .FALSE.
+          ELSE
+            WRITE(*, 100) "No changes to be written."
+          END IF
+          WRITE(*, 100, advance = "no") "Press Enter to continue . . ."
           READ *,
 
    
         CASE("C", "c")
-          WRITE(*, 100) "Latest changes not written."
-          WRITE(*, 100, advance="no") "Press Enter to continue . . ."
+
+          IF (NewChanges) THEN
+            WRITE(*, 100) "Latest changes discarded."
+          ELSE IF (ChangesMade) THEN
+            WRITE(*, 100) "No additional changes made."
+          ELSE
+            WRITE(*, 100) "No changes made."
+          END IF
+
+          WRITE(*, 100, advance = "no") "Press Enter to continue . . ."
           READ *
           EXIT !Exits mod submenu
 
