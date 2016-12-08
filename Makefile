@@ -113,4 +113,4 @@ modmenu.o: modmenu.f95
 	$(CC) -c modmenu.f95
 
 clean:
-	rm cbhproj *.o *.mod *.db core
+	rm cbhproj *.o *.mod *.db *.tar *.gz core
